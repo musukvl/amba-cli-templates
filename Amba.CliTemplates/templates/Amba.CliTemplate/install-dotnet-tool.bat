@@ -1,0 +1,1 @@
+dotnet tool install Amba.CliTemplate --global --add-source ./nupkg

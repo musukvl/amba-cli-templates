@@ -8,14 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Amba.CliTemplate
 {
-    [Command(Name = "di", Description = "Dependency Injection sample project")]
+    [Command(Name = "hw", Description = "Hello World CLI Command")]
     [HelpOption]
     class Program
     {
         //Configure command options here:
-
         [Argument(0, Description = "your name")]
-        public string Name { get; } = "dependency injection";
+        public string Name { get; }
 
         [Option("-l|--language", Description = "your desired language")]
         [AllowedValues("english", "spanish", IgnoreCase = true)]
@@ -37,7 +36,7 @@ namespace Amba.CliTemplate
             services.AddSingleton<Command>();
             services.AddSingleton<IConsole>(PhysicalConsole.Singleton);
             services.AddAutoMapper(typeof(Program).Assembly);
-            // Configure App services Here
+            // Configure App services here:
         }
 
 
@@ -55,8 +54,4 @@ namespace Amba.CliTemplate
             return _command.RunAsync(commandParameters, cancellationToken);
         }
     }
-
-
-
-
 }

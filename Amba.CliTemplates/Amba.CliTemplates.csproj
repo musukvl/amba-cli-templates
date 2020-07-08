@@ -6,7 +6,7 @@
     <PackageId>Amba.CliTemplates</PackageId>
     <Title>Cli application templates</Title>
     <Authors>Alexey V. Ryazhskikh</Authors>
-    <Description>CLI Templates based on e McMaster.Extensions.CommandLineUtils.</Description>
+    <Description>CLI Templates based on McMaster.Extensions.CommandLineUtils.</Description>
     <PackageTags>dotnet-tool;templates;cli</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
 
