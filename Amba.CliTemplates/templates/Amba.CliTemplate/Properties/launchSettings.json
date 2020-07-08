@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Amba.CliTemplate": {
+      "commandName": "Project"
+    },
+
+    "Amba.CliTemplate: help": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+
+    "Amba.CliTemplate: sample": {
+      "commandName": "Project",
+      "commandLineArgs": "Vasya -l spanish"
+    }
+  }
+}
