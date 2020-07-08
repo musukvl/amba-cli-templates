@@ -1,0 +1,1 @@
+dotnet new -i ./templates/Amba.CliTemplate

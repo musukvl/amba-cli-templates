@@ -1,0 +1,1 @@
+dotnet new -i ./bin/Amba.CliTemplates.1.0.0.nupkg
