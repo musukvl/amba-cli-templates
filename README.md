@@ -1,6 +1,6 @@
 # Console Application template
 
-Console application project template for .net core based on McMaster.Extensions.CommandLineUtils example.
+Console application project template for .NET 10 based on McMaster.Extensions.CommandLineUtils.
 
 Key features:
   * Singe command

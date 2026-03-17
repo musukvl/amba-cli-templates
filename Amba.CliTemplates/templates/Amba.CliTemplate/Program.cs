@@ -35,7 +35,17 @@ namespace Amba.CliTemplate
         {
             services.AddSingleton<Command>();
             services.AddSingleton<IConsole>(PhysicalConsole.Singleton);
-            services.AddAutoMapper(typeof(Program).Assembly);
+            services.AddSingleton(provider =>
+            {
+                var configuration = new MapperConfiguration(config =>
+                {
+                    config.AddMaps(typeof(Program).Assembly);
+                }, null);
+
+                return configuration;
+            });
+            services.AddSingleton<IMapper>(provider =>
+                provider.GetRequiredService<MapperConfiguration>().CreateMapper(provider.GetService));
             // Configure App services here:
         }
 
