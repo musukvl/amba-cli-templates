@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using McMaster.Extensions.CommandLineUtils;
+using Spectre.Console;
+using Spectre.Console.Cli;
 
 namespace Amba.CliTemplate
 {
-    class Command  
+    internal sealed class Command : AsyncCommand<GreetingCommandSettings>
     {
-        private readonly IConsole _console;
+        private readonly IAnsiConsole _console;
 
         public Command(IConsole console)
         {
             _console = console;
         }
 
-        public Task<int> RunAsync(CommandParameters commandParameters, CancellationToken cancellationToken = default)
+        public override Task<int> ExecuteAsync(CommandContext context, GreetingCommandSettings settings, CancellationToken cancellationToken)
         {
             // Replace with your code
             string greeting;
-            switch (commandParameters.Language)
+            switch (settings.Language.Trim().ToLowerInvariant())
             {
                 case "english": greeting = "Hello {0}"; break;
                 case "spanish": greeting = "Hola {0}"; break;
                 default: throw new InvalidOperationException("validation should have caught this");
             }
-            _console.WriteLine(greeting, commandParameters.Name);
+
+            _console.WriteLine(string.Format(greeting, settings.Name));
             return Task.FromResult(0);
         }
     }

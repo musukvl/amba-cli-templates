@@ -10,10 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="16.1.1" />
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="5.0.1" />
-    <PackageReference Include="McMaster.Extensions.Hosting.CommandLine" Version="5.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
   </ItemGroup>
 
 </Project>

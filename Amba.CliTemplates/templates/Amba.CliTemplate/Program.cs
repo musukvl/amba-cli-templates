@@ -1,67 +1,33 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using McMaster.Extensions.CommandLineUtils;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Spectre.Console;
+using Spectre.Console.Cli;
 
 namespace Amba.CliTemplate
 {
-    [Command(Name = "hw", Description = "Hello World CLI Command")]
-    [HelpOption]
-    class Program
+    internal static class Program
     {
-        //Configure command options here:
-        [Argument(0, Description = "your name")]
-        public string Name { get; }
-
-        [Option("-l|--language", Description = "your desired language")]
-        [AllowedValues("english", "spanish", IgnoreCase = true)]
-        public string Language { get; } = "english";
-
-        public static async Task<int> Main(string[] args)
+        public static Task<int> Main(string[] args)
         {
-            return await new HostBuilder()
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConsole();
-                })
-                .ConfigureServices(ConfigureServices)
-                .RunCommandLineApplicationAsync<Program>(args);
-        }
+            var services = new ServiceCollection();
+            ConfigureServices(services);
 
-        private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
-        {
-            services.AddSingleton<Command>();
-            services.AddSingleton<IConsole>(PhysicalConsole.Singleton);
-            services.AddSingleton(provider =>
+            var registrar = new TypeRegistrar(services);
+            var app = new CommandApp<Command>(registrar);
+
+            app.Configure(config =>
             {
-                var configuration = new MapperConfiguration(config =>
-                {
-                    config.AddMaps(typeof(Program).Assembly);
-                }, null);
-
-                return configuration;
+                config.SetApplicationName("hw");
+                config.AddExample(new[] { "Vasya", "--language", "spanish" });
             });
-            services.AddSingleton<IMapper>(provider =>
-                provider.GetRequiredService<MapperConfiguration>().CreateMapper(provider.GetService));
+
+            return app.RunAsync(args);
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<IAnsiConsole>(AnsiConsole.Console);
             // Configure App services here:
-        }
-
-
-        private readonly Command _command;
-
-        public Program(Command command)
-        {
-            _command = command;
-        }
-
-        private Task<int> OnExecuteAsync(CommandLineApplication app, CancellationToken cancellationToken)
-        {
-            var mapper = app.GetService<IMapper>();
-            var commandParameters = mapper.Map<CommandParameters>(this);
-            return _command.RunAsync(commandParameters, cancellationToken);
         }
     }
 }

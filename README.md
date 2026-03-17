@@ -1,9 +1,9 @@
 # Console Application template
 
-Console application project template for .NET 10 based on McMaster.Extensions.CommandLineUtils.
+Console application project template for .NET 10 based on Spectre.Console.Cli.
 
 Key features:
   * Singe command
   * Dependency injection
-  * Automapping command line options/arguments to command parameter object
+  * Strongly typed command settings with built-in validation
   * Build as dotnet tool

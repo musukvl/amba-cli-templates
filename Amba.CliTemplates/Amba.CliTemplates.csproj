@@ -6,7 +6,7 @@
     <PackageId>Amba.CliTemplates</PackageId>
     <Title>Cli application templates</Title>
     <Authors>Alexey V. Ryazhskikh</Authors>
-    <Description>CLI Templates based on McMaster.Extensions.CommandLineUtils.</Description>
+    <Description>CLI Templates based on Spectre.Console.Cli.</Description>
     <PackageTags>dotnet-tool;templates;cli</PackageTags>
     <TargetFramework>net10.0</TargetFramework>
 
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\nupkg\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
 
